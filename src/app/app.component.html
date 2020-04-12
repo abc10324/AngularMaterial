@@ -10,8 +10,7 @@
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav mode="over" #sideNav>Sidenav content</mat-sidenav>
   <mat-sidenav-content>
-    <!-- <ng-container *ngComponentOutlet="mapping.get(currentModule)"></ng-container> -->
-    <app-login (loginStatus)="onLogin($event)"></app-login>
+    <ng-container *ngComponentOutlet="mapping.get(currentModule)"></ng-container>
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginComponent } from './login/login.component';
+import { LoginServce } from './service/login-servce.service';
 
 @Component({
   selector: 'app-root',
@@ -19,13 +20,16 @@ export class AppComponent{
     ['Login',LoginComponent]
   ]);
   
+  constructor(private loginService: LoginServce){
+    this.loginService.loginStatus.subscribe((loginStatus :boolean) => {
+      console.log("loginStatus = " + loginStatus);
+      this.showNav = loginStatus;
+    });
+  }
+
   changeModule(moduleName : string){
     this.currentModule = moduleName;
   }
 
-  onLogin(loginStatus: boolean){
-    this.showNav = loginStatus;
-  }
-  
 }
 
