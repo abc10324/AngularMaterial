@@ -1,9 +1,10 @@
 <mat-toolbar color="primary">
-  <button mat-icon-button (click)="sideNav.toggle()" [disabled]="showNav == false" ><mat-icon>menu</mat-icon></button>
+  <button mat-icon-button (click)="sideNav.toggle()" [disabled]="isHideNav()" ><mat-icon>menu</mat-icon></button>
   &nbsp;&nbsp;
   <span>{{ title }}</span>
   <span class="toolbar-seprator"></span>
 
+  <button mat-icon-button (click)="logout()" [disabled]="isHideNav()"><mat-icon>exit_to_app</mat-icon></button>
   <button mat-icon-button><mat-icon>settings</mat-icon></button>
 </mat-toolbar>
 

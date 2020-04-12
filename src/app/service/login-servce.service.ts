@@ -28,6 +28,10 @@ export class LoginServce {
                });
   }
 
+  logout(){
+    this.loginStatus.emit(false);
+  }
+
   genUser(userName: string,password: string){
     return new User(userName,password);
   }

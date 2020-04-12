@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { LoginComponent } from './login/login.component';
+import { MainpageComponent } from './component/mainpage/mainpage.component';
 import { LoginServce } from './service/login-servce.service';
 
 @Component({
@@ -7,28 +8,48 @@ import { LoginServce } from './service/login-servce.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css'],
   entryComponents:[
-    LoginComponent
+    LoginComponent,
+    MainpageComponent
   ]
 })
 export class AppComponent{
   title = 'Iot Management System';
   currentModule = 'Login';
-  showNav = false;
+  isLogin = false;
 
 
   mapping = new Map<string,any>([
-    ['Login',LoginComponent]
+    ['Login',LoginComponent],
+    ['Mainpage',MainpageComponent]
   ]);
   
   constructor(private loginService: LoginServce){
     this.loginService.loginStatus.subscribe((loginStatus :boolean) => {
       console.log("loginStatus = " + loginStatus);
-      this.showNav = loginStatus;
+      this.isLogin = loginStatus;
+
+      if(this.isLogin){
+        this.currentModule = 'Mainpage';
+      } else {
+        this.currentModule = 'Login';
+      }
     });
   }
 
   changeModule(moduleName : string){
-    this.currentModule = moduleName;
+    if(this.isLogin){
+      this.currentModule = moduleName;
+    } else {
+      this.currentModule = 'Login';
+    }
+  }
+
+  isHideNav(){
+    return !this.isLogin;
+  }
+
+  logout(){
+    this.loginService.logout();
   }
 
 }
